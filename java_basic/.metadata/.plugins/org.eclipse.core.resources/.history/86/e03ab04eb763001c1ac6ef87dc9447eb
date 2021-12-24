@@ -1,0 +1,9 @@
+package data_and_operation
+public class StringOperatoin {
+
+	public static void main(String[] args) {
+		System.out.println("Hello world".length());
+
+	}
+
+}
