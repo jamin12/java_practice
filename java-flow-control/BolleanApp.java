@@ -1,9 +1,8 @@
-
 public class BolleanApp {
-
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		String foo = "Hello world";
+		System.out.println(foo.contains("world"));
+		System.out.println(foo.contains("egoging"));
 	}
 
 }
