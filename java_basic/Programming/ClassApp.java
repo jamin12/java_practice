@@ -6,5 +6,4 @@ public class ClassApp {
 		System.out.println(Math.ceil(1.6));
 
 	}
-
 }
