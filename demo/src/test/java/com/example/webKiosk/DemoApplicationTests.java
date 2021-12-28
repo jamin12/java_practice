@@ -1,14 +1,13 @@
-package com.example.firstproject;
+package com.example.webKiosk;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class FirstprojectApplicationTests {
+class DemoApplicationTests {
 
 	@Test
 	void contextLoads() {
-
 	}
 
 }
