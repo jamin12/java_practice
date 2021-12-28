@@ -1,11 +1,8 @@
 package com.example.firstproject.controller;
 
-import java.util.ArrayList;
-
 import com.example.firstproject.dto.ArticleForm;
 import com.example.firstproject.entitiy.Article;
 import com.example.firstproject.repository.ArticleRepository;
-import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import antlr.collections.List;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -78,5 +74,36 @@ public class ArticleController {
         model.addAttribute("article", articleEntitiy);
         // 뷰 페이지 설정
         return "articles/edit";
+    }
+
+    @PostMapping("/articles/update")
+    public String update(ArticleForm form) {
+        log.info(form.toString());
+        // 1: DTO를 엔티티로 변환한다!
+        Article articleEntitiy = form.toEntitiy();
+        log.info(articleEntitiy.toString());
+        // 2: 엔티티를 db로 저장한다
+        // 2-1: db에서 기존 데이터를 가져온다!
+        Article target = articleRepository.findById(articleEntitiy.getId()).orElse(null);
+        // 2-2: 기존 데이터에 값을 갱신한다!
+        if (target != null) {
+            articleRepository.save(articleEntitiy); // 엔티티 저장
+        }
+        // 3: 수정 겨로가를 페이지로 리다이렉트 한다
+        return "redirect:/articles/" + articleEntitiy.getId();
+    }
+
+    @GetMapping("/articles/{id}/delete")
+    public String delete(@PathVariable Long id) {
+        // 1: 삭제대상을 가져온다
+        Article target = articleRepository.findById(id).orElse(null);
+
+        // 2: 대상을 삭제한다
+        if (target != null) {
+            articleRepository.delete(target);
+        }
+
+        // 3: 결과 페이지로 리다이렉트
+        return "redirect:/articles/";
     }
 }
