@@ -3,6 +3,7 @@ package com.example.firstproject.dto;
 import com.example.firstproject.entitiy.Article;
 
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @ToString
