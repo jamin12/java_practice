@@ -4,11 +4,13 @@ import com.example.firstproject.entitiy.Article;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 @ToString
 @AllArgsConstructor
-// @NoArgsConstructor
+@NoArgsConstructor
+@Setter
 public class ArticleForm {
 
     private Long id;

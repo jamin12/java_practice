@@ -1,13 +1,13 @@
-package com.example.webKiosk;
+package com.example.webkiosk;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DemoApplication {
+public class WebkioskApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run(WebkioskApplication.class, args);
 	}
 
 }

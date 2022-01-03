@@ -17,7 +17,6 @@ import lombok.ToString;
 @NoArgsConstructor // 기본 생성자
 @AllArgsConstructor // 모든 args를 가진 생성자
 public class Article {
-
     @Id // 대표 값을 지정
     @GeneratedValue(strategy = GenerationType.IDENTITY) // DB가 id를 자동 생성 어노테이션
     private Long id;
@@ -26,4 +25,13 @@ public class Article {
     private String title;
     @Column
     private String content;
+
+    public void patch(Article article){
+        if(article.title != null){
+            this.title = article.title;
+        }
+        if(article.content != null){
+            this.content = article.content;
+        }
+    }
 }
