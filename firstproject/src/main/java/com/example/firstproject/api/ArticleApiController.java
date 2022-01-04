@@ -10,6 +10,7 @@ import com.example.firstproject.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -56,11 +57,20 @@ public class ArticleApiController {
     }
 
     //delete
-    @PatchMapping("/api/articles/{id}")
+    @DeleteMapping("/api/articles/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         Article deleted = articleService.delete(id);
         return (deleted != null) ? 
             ResponseEntity.status(HttpStatus.OK).build():
+            ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
+    //트랜잭션 -> 실패 -> 롤백
+    @PostMapping("/api/tranjection-test")
+    public ResponseEntity<List<Article>> tranjectionTest(@RequestBody List<ArticleForm> dtos){
+        List<Article> createList= articleService.createArticles(dtos);
+        return (createList != null) ?
+            ResponseEntity.status(HttpStatus.OK).body(createList):
             ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 }
