@@ -24,6 +24,10 @@ dependencies {
 	//롬복 추가
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+
+
+
+
 }
 
 test {

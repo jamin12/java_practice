@@ -42,35 +42,31 @@ public class ArticleApiController {
     @PostMapping("/api/articles")
     public ResponseEntity<Article> create(@RequestBody ArticleForm dto) {
         Article created = articleService.create(dto);
-        return (created  != null) ? 
-            ResponseEntity.status(HttpStatus.OK).body(created):
-            ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-    }   
-
-    //patch
-    @PatchMapping("/api/articles/{id}")
-    public ResponseEntity<Article> update(@PathVariable Long id,@RequestBody ArticleForm dto) { 
-        Article updated = articleService.update(id,dto);
-        return (updated != null) ? 
-            ResponseEntity.status(HttpStatus.OK).body(updated):
-            ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        return (created != null) ? ResponseEntity.status(HttpStatus.OK).body(created)
+                : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
-    //delete
+    // patch
+    @PatchMapping("/api/articles/{id}")
+    public ResponseEntity<Article> update(@PathVariable Long id, @RequestBody ArticleForm dto) {
+        Article updated = articleService.update(id, dto);
+        return (updated != null) ? ResponseEntity.status(HttpStatus.OK).body(updated)
+                : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
+    // delete
     @DeleteMapping("/api/articles/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         Article deleted = articleService.delete(id);
-        return (deleted != null) ? 
-            ResponseEntity.status(HttpStatus.OK).build():
-            ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        return (deleted != null) ? ResponseEntity.status(HttpStatus.OK).build()
+                : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
-    //트랜잭션 -> 실패 -> 롤백
+    // 트랜잭션 -> 실패 -> 롤백
     @PostMapping("/api/tranjection-test")
-    public ResponseEntity<List<Article>> tranjectionTest(@RequestBody List<ArticleForm> dtos){
-        List<Article> createList= articleService.createArticles(dtos);
-        return (createList != null) ?
-            ResponseEntity.status(HttpStatus.OK).body(createList):
-            ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    public ResponseEntity<List<Article>> tranjectionTest(@RequestBody List<ArticleForm> dtos) {
+        List<Article> createList = articleService.createArticles(dtos);
+        return (createList != null) ? ResponseEntity.status(HttpStatus.OK).body(createList)
+                : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 }
