@@ -10,8 +10,8 @@ import org.springframework.data.repository.query.Param;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
     // 특정 게시글의 모든 댓글 조회
-    @Query(value = "Select *" +
-            "from comment" +
+    @Query(value = "Select * " +
+            "from comment " +
             "where article_id = :articleId", nativeQuery = true)
     List<Comment> findByArticleId(@Param("articleId") Long articleId);
 
