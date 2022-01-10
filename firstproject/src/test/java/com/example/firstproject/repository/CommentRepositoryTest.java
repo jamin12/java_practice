@@ -45,7 +45,6 @@ public class CommentRepositoryTest {
             // 실제 수행
             List<Comment> comments = commentRepository.findByArticleId(articleId);
             // 예상하기
-            Article article = new Article(1L, "qwer","1111");
             List<Comment> expected = Arrays.asList();
             // 검증
             assertEquals(expected.toString(), comments.toString(), "1번 글은 댓글이 없음");
@@ -62,12 +61,12 @@ public class CommentRepositoryTest {
             // 실제 수행
             List<Comment> comments = commentRepository.findByNickname(nickname);
             // 예상하기
-            Comment a = new Comment(1L,new Article(4L, "당신의 인생 영화는?", "댓글 ㄱ"),"Park","굳 윌 헌팅");
-            Comment b = new Comment(4L,new Article(5L, "당신의 인생 푸드는?", "댓글 ㄱ"),"Park","치킨");
-            Comment c = new Comment(7L,new Article(6L, "당신의 인생 취미는?", "댓글 ㄱ"),"Park","조깅");
-            List<Comment> expected = Arrays.asList(a,b,c);
-            //검증
-            assertEquals(expected, comments,"Park의 모듯 댓글을 출력");
+            Comment a = new Comment(1L, new Article(4L, "당신의 인생 영화는?", "댓글 ㄱ"), "Park", "굳 윌 헌팅");
+            Comment b = new Comment(4L, new Article(5L, "당신의 인생 음식은?", "댓글 ㄱ"), "Park", "치킨");
+            Comment c = new Comment(7L, new Article(6L, "당신의 인생 취미는?", "댓글 ㄱ"), "Park", "조깅");
+            List<Comment> expected = Arrays.asList(a, b, c);
+            // 검증
+            assertEquals(expected, comments, "Park의 모듯 댓글을 출력");
         }
     }
 }
