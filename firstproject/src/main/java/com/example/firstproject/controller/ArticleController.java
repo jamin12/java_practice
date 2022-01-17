@@ -5,9 +5,7 @@ import java.util.List;
 import com.example.firstproject.dto.ArticleForm;
 import com.example.firstproject.dto.CommentDto;
 import com.example.firstproject.entitiy.Article;
-import com.example.firstproject.entitiy.Comment;
 import com.example.firstproject.repository.ArticleRepository;
-import com.example.firstproject.repository.CommentRepository;
 import com.example.firstproject.service.CommentService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +65,7 @@ public class ArticleController {
         return "articles/show";
     }
 
-    @GetMapping("/articles")
+    @GetMapping(value = "/articles")
     public String index(Model model) {
         // 1: 모든 article을 가져온다
         java.util.List<Article> articleEntitiyList = articleRepository.findAll();

@@ -3,7 +3,6 @@ package com.example.firstproject.api;
 import java.util.List;
 
 import com.example.firstproject.dto.CommentDto;
-import com.example.firstproject.entitiy.Comment;
 import com.example.firstproject.service.CommentService;
 
 import org.springframework.beans.factory.annotation.Autowired;
