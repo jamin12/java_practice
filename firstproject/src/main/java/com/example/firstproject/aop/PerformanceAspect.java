@@ -31,11 +31,9 @@ public class PerformanceAspect {
     public void loggingRunningTime(ProceedingJoinPoint joinPoint) throws Throwable {
         // 메소드 수행전, 측정 시작
         StopWatch stopWatch = new StopWatch();
-        StopWatch stopWatch2 = new StopWatch();
 
         stopWatch.start();
         // 메소드 수행
-        Object returningobj = joinPoint.proceed();
         // 메소드 수행 후 측정 종료 및 로깅
         stopWatch.stop();
         // 메소드 명

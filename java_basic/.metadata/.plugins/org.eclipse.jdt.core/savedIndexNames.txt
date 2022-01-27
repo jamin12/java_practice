@@ -1,6 +1,0 @@
-INDEX VERSION 1.131+C:\Users\jamin\Desktop\jamin\project\java_practice\java_basic\.metadata\.plugins\org.eclipse.jdt.core
-598213832.index
-3090851262.index
-1277146372.index
-1865797976.index
-3998055702.index

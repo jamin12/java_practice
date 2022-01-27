@@ -15,42 +15,42 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class DebuggingAspect {
 
-    // 대상 메소드 선택: api 패키지의 모든 메소드
-    @Pointcut("execution(* com.example.firstproject.api.*.*(..))")
-    private void cut() {
+        // 대상 메소드 선택: api 패키지의 모든 메소드
+        @Pointcut("execution(* com.example.firstproject.api.*.*(..))")
+        private void cut() {
 
-    }
-
-    // 실행 시점 설정: cut()의 대상이 수행되기 이전
-    @Before(value = "cut()")
-    public void loggingArgs(JoinPoint joinpoint) { // cut()의 대상 메소드
-        // 입력값 가져오기
-        Object[] args = joinpoint.getArgs();
-        // 클래스명
-        String classNmae = joinpoint.getTarget()
-                .getClass()
-                .getSimpleName();
-        // 메소드명
-        String methodName = joinpoint.getSignature()
-                .getName();
-        // 입력값 로깅하기
-        for (Object obj : args) {
-            log.info("{}#{}의 입력값 => {}", classNmae, methodName, obj);
         }
-    }
 
-    // 실행 시점 설정: cut()에 지정된 대상 호출 성공 후!
-    @AfterReturning(value = "cut()", returning = "returnObj")
-    public void loggingReturnValue(JoinPoint joinPoint, // cut()의 대상 메소드
-            Object returnObj) { // 리턴값
-        // 클래스명
-        String classNmae = joinPoint.getTarget()
-                .getClass()
-                .getSimpleName();
-        // 메소드명
-        String methodName = joinPoint.getSignature()
-                .getName();
-        // 반환값 로깅
-        log.info("{}#{}의 반환값 => {}", classNmae, methodName, returnObj);
-    }
+        // 실행 시점 설정: cut()의 대상이 수행되기 이전
+        @Before(value = "cut()")
+        public void loggingArgs(JoinPoint joinpoint) { // cut()의 대상 메소드
+                // 입력값 가져오기
+                Object[] args = joinpoint.getArgs();
+                // 클래스명
+                String classNmae = joinpoint.getTarget()
+                                .getClass()
+                                .getSimpleName();
+                // 메소드명
+                String methodName = joinpoint.getSignature()
+                                .getName();
+                // 입력값 로깅하기
+                for (Object obj : args) {
+                        log.info("{}#{}의 입력값 => {}", classNmae, methodName, obj);
+                }
+        }
+
+        // 실행 시점 설정: cut()에 지정된 대상 호출 성공 후!
+        @AfterReturning(value = "cut()", returning = "returnObj")
+        public void loggingReturnValue(JoinPoint joinPoint, // cut()의 대상 메소드
+                        Object returnObj) { // 리턴값
+                // 클래스명
+                String classNmae = joinPoint.getTarget()
+                                .getClass()
+                                .getSimpleName();
+                // 메소드명
+                String methodName = joinPoint.getSignature()
+                                .getName();
+                // 반환값 로깅
+                log.info("{}#{}의 반환값 => {}", classNmae, methodName, returnObj);
+        }
 }
