@@ -6,6 +6,7 @@ import com.example.firstproject.dto.ArticleForm;
 import com.example.firstproject.dto.CommentDto;
 import com.example.firstproject.entitiy.Article;
 import com.example.firstproject.repository.ArticleRepository;
+import com.example.firstproject.service.ArticleService;
 import com.example.firstproject.service.CommentService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +28,9 @@ public class ArticleController {
     private ArticleRepository articleRepository;
 
     @Autowired
+    private ArticleService articleService;
+
+    @Autowired
     private CommentService commentService;
 
     @GetMapping("/articles/new")
@@ -34,8 +39,10 @@ public class ArticleController {
     }
 
     @PostMapping("/articles/create")
-    public String createArticle(ArticleForm form) {
+    public String createArticle(ArticleForm form, MultipartHttpServletRequest multipartHttpServletRequest)
+            throws Exception {
         log.info(form.toString());
+        log.info("여기 여기 여기좀 봐봡요");
         // System.out.println(form.toString()); -- > 로깅기능으로 대체
 
         // 1. dto 변환 entitiy
@@ -44,7 +51,7 @@ public class ArticleController {
         log.info(article.toString());
 
         // 2. repository에게 entitiy를 db안에 저장하게 함
-        Article saved = articleRepository.save(article);
+        Article saved = articleService.create(form, multipartHttpServletRequest);
         // System.out.println(saved.toString());
         log.info(saved.toString());
 

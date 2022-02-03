@@ -1,7 +1,7 @@
 {{>layouts/header}}
 
 {{#article}}
-<form class="container" action="/articles/update" method="post">
+<form class="container" action="/articles/update" method="post" enctype="multipart/form-data">
     <input name="id" type="hidden" value="{{id}}"/>
     <div class="mb-3">
         <label class="from-lable">제목</label>
@@ -12,7 +12,7 @@
         <textarea class="form-control" row="3" name="content">{{content}}</textarea>
     </div>
     <div>
-        <input type="file" class="form-control" name="fileName">
+        <input type="file" class="form-control" name="file">
     </div>
     <br>
     <button type="submit" class="btn btn-primary">제출</button>

@@ -1,5 +1,7 @@
 package com.example.firstproject.entitiy;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,12 +27,14 @@ public class Article {
     private String title;
     @Column
     private String content;
+    // @Column
+    // private List<File> files;
 
-    public void patch(Article article){
-        if(article.title != null){
+    public void patch(Article article) {
+        if (article.title != null) {
             this.title = article.title;
         }
-        if(article.content != null){
+        if (article.content != null) {
             this.content = article.content;
         }
     }

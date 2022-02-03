@@ -11,8 +11,10 @@
         {{#articleList}}
         <tr>
             <th>{{id}}</th>
-            <td><a href="/articles/{{id}}">{{title}}</a></td>
-            <td>{{content}}</td>
+            <td><a href="/articles/{{id}}">{{#title}}{{title}}{{/title}}
+                {{^title}}널입니다.{{/title}}</a></td>
+            <td>{{#content}}{{content}}{{/content}}
+                {{^content}}널입니다.{{/content}}</td>
         </tr>
         {{/articleList}}
     </tbody>

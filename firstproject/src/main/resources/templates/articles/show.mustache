@@ -11,8 +11,11 @@
         {{#article}}
         <tr>
             <th>{{id}}</th>
-            <td>{{title}}</td>
-            <td>{{content}}</td>
+            <td>{{#title}}{{title}}{{/title}}
+              {{^title}}널입니다.{{/title}}
+            </td>
+            <td>{{#content}}{{content}}{{/content}}
+              {{^content}}널입니다.{{/content}}</td>
         </tr>
         {{/article}}
     </tbody>

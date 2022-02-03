@@ -1,7 +1,10 @@
 package com.example.firstproject.service;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.servlet.http.HttpServletRequest;
 
 import com.example.firstproject.dto.ArticleForm;
 import com.example.firstproject.entitiy.Article;
@@ -10,6 +13,9 @@ import com.example.firstproject.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,8 +33,25 @@ public class ArticleService {
         return articleRepository.findById(id).orElse(null);
     }
 
-    public Article create(ArticleForm dto) {
+    public Article create(ArticleForm dto, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception {
+        log.info("여기요 여기");
         Article article = dto.toEntitiy();
+        if (ObjectUtils.isEmpty(multipartHttpServletRequest) == false) {
+            Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
+            String name;
+            while (iterator.hasNext()) {
+                name = iterator.next();
+                log.info("file tag name" + name);
+                List<MultipartFile> list = multipartHttpServletRequest.getFiles(name);
+                for (MultipartFile multipartFile : list) {
+                    log.info("start file information");
+                    log.info("file name : " + multipartFile.getOriginalFilename());
+                    log.info("file size : " + multipartFile.getSize());
+                    log.info("file content type : " + multipartFile.getContentType());
+                    log.info("end file information \n");
+                }
+            }
+        }
         if (article.getId() != null) {
             return null;
         }

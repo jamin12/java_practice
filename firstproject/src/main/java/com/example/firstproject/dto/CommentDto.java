@@ -20,7 +20,6 @@ public class CommentDto {
     private String body;
 
     public static CommentDto createCommentDto(Comment comment) {
-
         return new CommentDto(
                 comment.getId(),
                 comment.getArticle2().getId(),

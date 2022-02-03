@@ -1,6 +1,9 @@
 package com.example.firstproject.dto;
 
+import java.util.List;
+
 import com.example.firstproject.entitiy.Article;
+import com.example.firstproject.entitiy.File;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -16,6 +19,7 @@ public class ArticleForm {
     private Long id;
     private String title;
     private String content;
+    private List<FileDto> files;
 
     public Article toEntitiy() {
         return new Article(id, title, content);

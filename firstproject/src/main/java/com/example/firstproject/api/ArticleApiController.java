@@ -3,6 +3,7 @@ package com.example.firstproject.api;
 import java.util.List;
 
 import com.example.firstproject.dto.ArticleForm;
+import com.example.firstproject.dto.FileDto;
 import com.example.firstproject.entitiy.Article;
 import com.example.firstproject.service.ArticleService;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,8 +40,9 @@ public class ArticleApiController {
 
     // POST
     @PostMapping("/api/articles")
-    public ResponseEntity<Article> create(@RequestBody ArticleForm dto) {
-        Article created = articleService.create(dto);
+    public ResponseEntity<Article> create(@RequestBody ArticleForm dto,
+            MultipartHttpServletRequest multiparthttpServletRequest) throws Exception {
+        Article created = articleService.create(dto, multiparthttpServletRequest);
         return (created != null) ? ResponseEntity.status(HttpStatus.OK).body(created)
                 : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }

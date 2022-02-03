@@ -12,12 +12,15 @@ spring:
 # 이쁘게 보여주기
         properties:
             hibernate:
-                format_sql: true
+                format-sql: true
 # 파일 처리
     servlet:
         multipart:
-            maxFileSize: 10MB
-            maxRequestSize: 20MB
+            enabled: true
+            location: c:\user\jamin\Desktop
+            max-File-Size: 10MB
+            max-Request-Size: 20MB
+            file-size-threshold: 1MB
 
 #로깅 설정
 logging:
