@@ -42,7 +42,7 @@ public class ArticleApiController {
     @PostMapping("/api/articles")
     public ResponseEntity<Article> create(@RequestBody ArticleForm dto,
             MultipartHttpServletRequest multiparthttpServletRequest) throws Exception {
-        Article created = articleService.create(dto, multiparthttpServletRequest);
+        Article created = articleService.create(dto);
         return (created != null) ? ResponseEntity.status(HttpStatus.OK).body(created)
                 : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }

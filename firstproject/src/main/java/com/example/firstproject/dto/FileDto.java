@@ -4,7 +4,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.example.firstproject.entitiy.Article;
-import com.example.firstproject.entitiy.File;
+import com.example.firstproject.entitiy.FileE;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -29,9 +29,9 @@ public class FileDto {
     private String filePath;
 
     // 파일 사이즈
-    private Integer fileSize;
+    private Long fileSize;
 
-    public static FileDto createfileDto(File file) {
+    public static FileDto createfileDto(FileE file) {
         return new FileDto(
                 file.getId(),
                 file.getArticleId().getId(),
@@ -39,4 +39,12 @@ public class FileDto {
                 file.getFilePath(),
                 file.getFileSize());
     }
+
+    public FileDto(Long articleId, String fileName, String filePath, Long fileSize) {
+        this.articleId = articleId;
+        this.fileName = fileName;
+        this.filePath = filePath;
+        this.fileSize = fileSize;
+    }
+
 }

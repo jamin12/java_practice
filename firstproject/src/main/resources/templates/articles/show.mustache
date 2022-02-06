@@ -20,7 +20,15 @@
         {{/article}}
     </tbody>
 </table>
-
+<h5>file</h5>
+{{#file}}
+<ol class="list-group">
+  <li class="list-group-item">
+    <a href="#" class="list-group-item list-group-item-action">{{fileName}}</a>
+  </li>
+</ol>
+{{/file}}
+<br/>
 <a href="/articles/{{article.id}}/edit" class="btn btn-primary">Edit</a>
 <a href="/articles/{{article.id}}/delete" class="btn btn-danger">Delete</a>
 <a href="/articles">Go to Article list</a>

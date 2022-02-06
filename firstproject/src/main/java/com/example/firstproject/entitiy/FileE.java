@@ -1,5 +1,6 @@
 package com.example.firstproject.entitiy;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,14 +21,14 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class File {
+public class FileE {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     // 게시글 번호
 
-    @ManyToOne // 해당 댓글 엔티티 여러개가, 하나의 Article에 연관된다!
+    @ManyToOne(cascade = CascadeType.ALL) // 해당 댓글 엔티티 여러개가, 하나의 Article에 연관된다!
     @JoinColumn(name = "article_id") // "articleid" 컬럼에 Article의 대표값을 저장
     private Article articleId;
 
@@ -41,10 +42,10 @@ public class File {
 
     // 파일 사이즈
     @Column
-    private Integer fileSize;
+    private Long fileSize;
 
-    public static File cretaeFile(FileDto dto, Article article) {
-        return new File(
+    public static FileE cretaeFile(FileDto dto, Article article) {
+        return new FileE(
                 dto.getId(),
                 article,
                 dto.getFileName(),

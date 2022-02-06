@@ -4,10 +4,13 @@ import java.util.List;
 
 import com.example.firstproject.dto.ArticleForm;
 import com.example.firstproject.dto.CommentDto;
+import com.example.firstproject.dto.FileDto;
 import com.example.firstproject.entitiy.Article;
+import com.example.firstproject.entitiy.FileE;
 import com.example.firstproject.repository.ArticleRepository;
 import com.example.firstproject.service.ArticleService;
 import com.example.firstproject.service.CommentService;
+import com.example.firstproject.service.FileService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +34,9 @@ public class ArticleController {
     private ArticleService articleService;
 
     @Autowired
+    private FileService fileService;
+
+    @Autowired
     private CommentService commentService;
 
     @GetMapping("/articles/new")
@@ -42,7 +48,6 @@ public class ArticleController {
     public String createArticle(ArticleForm form, MultipartHttpServletRequest multipartHttpServletRequest)
             throws Exception {
         log.info(form.toString());
-        log.info("여기 여기 여기좀 봐봡요");
         // System.out.println(form.toString()); -- > 로깅기능으로 대체
 
         // 1. dto 변환 entitiy
@@ -51,7 +56,9 @@ public class ArticleController {
         log.info(article.toString());
 
         // 2. repository에게 entitiy를 db안에 저장하게 함
-        Article saved = articleService.create(form, multipartHttpServletRequest);
+        Article saved = articleService.create(form);
+
+        fileService.createFile(article, multipartHttpServletRequest);
         // System.out.println(saved.toString());
         log.info(saved.toString());
 
@@ -65,9 +72,11 @@ public class ArticleController {
         // 1: id로 데이터를 가져옴!
         Article articelEntitiy = articleRepository.findById(id).orElse(null);
         List<CommentDto> commentDtos = commentService.comments(id);
+        List<FileDto> fileDto = fileService.ShowFileById(articelEntitiy);
         // 2: 가져온 데이터를 모델에 등록!
         model.addAttribute("article", articelEntitiy);
         model.addAttribute("commentDtos", commentDtos);
+        model.addAttribute("file", fileDto);
         // 3: 보여줄 페이지를 설정!
         return "articles/show";
     }
